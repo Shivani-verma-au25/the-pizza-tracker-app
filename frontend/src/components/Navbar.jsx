@@ -17,7 +17,10 @@ function Navbar() {
           <Link className="text-md font-semibold text-gray-500" >Register</Link>
           <Link className="text-md font-semibold text-gray-500" >Login</Link>
         </div>
-        <FaCartPlus className="" />
+        <Link to={'/cart'} className="flex justify-center items-center gap-2 bg-yellow-400 px-3 py-1 rounded-md cursor-pointer hover:scale-105 transition-all duration-200 ease-in">
+          <span>0</span>
+          <FaCartPlus className="" />
+        </Link>
       </div>
     </nav>
   );

@@ -4,10 +4,10 @@ import React from "react";
 
 function Home() {
   return (
-    <div className="max-w-7xl mx-auto ">
+    <div className="max-w-7xl h-screen mx-auto ">
       <section className="bg-gray-50 h-full flex items-center justify-center">
         {/* left side */}
-        <div className="w-1/2 h-10/12 flex flex-col gap-5 justify-center items-start px-10">
+        <div className="w-1/2  flex flex-col gap-5 justify-center items-start px-10">
           <h1 className="text-xl font-semibold italic text-gray-700">
             Are you hungry? Bro
           </h1>
