@@ -7,7 +7,7 @@ configDotenv()
 
 export const isVarifyUser = asyncHandler(async(req , res ,next) =>{
     // get token from cookies and auth headers
-    const token = req.cookies.rToken || req.header('Authorization')?.replace('Bearer ',"");
+    const token = req.cookies?.rToken || req.header('Authorization')?.replace('Bearer ',"");
     // if there is no token
     if (!token) {
         return res.status(409).json({
