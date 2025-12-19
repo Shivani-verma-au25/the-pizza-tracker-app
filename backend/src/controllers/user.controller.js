@@ -119,9 +119,29 @@ export const signinUser = asyncHandler( async (req, res) =>{
 
     // return response
 
-    return res.status(201).json({
+    return res.status(201)
+    .cookie('rToken',rToken,options)
+    .json({
         success:true,
         message:`Welcome back ${user.username} !`,
         user
     })
+})
+
+// user signout controller
+
+export const signOutUser = asyncHandler( async(req, res) =>{
+    //  clear token from cookies you set when you login
+    // TODO : Need to inprove this code for production level
+    res.clearCookie('rToken',{
+        httpOnly:true,
+        secure :true,
+        sameSite:'strict',
+        maxAge: 1 * 24 * 60 * 60 * 1000,
+    });
+    return res.status(200).json({
+        success : true,
+        message : `You Logged out.`
+    })
+    
 })
