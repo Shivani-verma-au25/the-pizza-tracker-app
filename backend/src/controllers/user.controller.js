@@ -71,7 +71,6 @@ export const signupUser = asyncHandler(async ( req, res) =>{
 
 export const signinUser = asyncHandler( async (req, res) =>{
     const {email,password} = req.body;
-    console.log(req.body);
     if (!email || !password) {
         return res.status(400).json({
             success:false,
@@ -109,7 +108,6 @@ export const signinUser = asyncHandler( async (req, res) =>{
 
     // generate token
     const rToken = await existUser.generateAccessToken();
-    console.log('rtoken',rToken);
 
     // options
     const options = {
@@ -126,8 +124,4 @@ export const signinUser = asyncHandler( async (req, res) =>{
         message:`Welcome back ${user.username} !`,
         user
     })
-
-    
-
-
 })
