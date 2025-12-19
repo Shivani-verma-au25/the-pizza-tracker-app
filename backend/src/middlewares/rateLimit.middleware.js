@@ -1,5 +1,4 @@
 import {rateLimit} from 'express-rate-limit'
-import { asyncHandler } from '../utils/asyncHandler.js'
 
 export const SignInRateLimiter = rateLimit({
     windowMs:15*60*100, //15 mnt
