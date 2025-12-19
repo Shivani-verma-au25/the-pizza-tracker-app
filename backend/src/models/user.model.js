@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'  
 
 const userSchema = new Schema({
-    userName :{
+    username :{
         type : String,
         trim : true,
         required : true,
@@ -17,7 +17,12 @@ const userSchema = new Schema({
     password:{
         type: String,
         trim:true,
-        minlength: 6
+        minlength: 6,
+    },
+    role:{
+        type:String,
+        enum:['user','admin'],
+        default:'user',
     }
 },{timestamps:true})
 
@@ -57,7 +62,7 @@ userSchema.methods.generateAccessToken = function(){
             email:this.email
         },
         process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn:process.env.ACCESS_TOKEN_SECRET}
+        {expiresIn:process.env.ACCESS_TOKEN_EXPIRES_IN}
     )
 }
 
