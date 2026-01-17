@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Cart from './components/Cart'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import { Toaster } from './components/ui/sonner'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/cart' element={<Cart />} />
       </Routes>
+      <Toaster/>
     </>
   )
 }
