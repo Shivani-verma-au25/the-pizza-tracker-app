@@ -17,7 +17,6 @@ const useGetCurrentUser = () => {
             console.log("error in getting current user",error); 
         }
     }
-
         getCurrentUser() 
     } ,[])   
 }

@@ -132,7 +132,7 @@ export const signinUser = asyncHandler( async (req, res) =>{
 
 export const signOutUser = asyncHandler( async(_, res) =>{
     //  clear token from cookies you set when you login
-    // TODO : Need to inprove this code for production level
+    // TODO : Need to improve this code for production level
     res.clearCookie('rToken',{
         httpOnly:true,
         secure :true,

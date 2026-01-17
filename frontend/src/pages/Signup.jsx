@@ -38,12 +38,12 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // set loading true
-    setLoading(true)
+      setLoading(true)
     try {
       // calling custom hook
       await signUp(formData);
     } catch (error) {
-      console.log("error from signup" ,error);
+      console.log("error from signup",error);
     } finally{
       setLoading(false)
     }
