@@ -37,26 +37,12 @@ function Signup() {
   // handle submit user handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // set loading true
-      setLoading(true)
     try {
       // calling custom hook
       await signUp(formData);
     } catch (error) {
       console.log("error from signup",error);
-    } finally{
-      setLoading(false)
-    }
-    
-  
-    // try {
-    //   const resp = await baseUrl.post("v1/users/signup", formData);
-    //   console.log("user data", resp);
-    // } catch (error) {
-    //   console.log("getting error while signup", error);
-    // }finally{
-    //   setLoading(false)
-    // }
+    } 
   };
 
 
@@ -139,11 +125,11 @@ function Signup() {
                 Already have an Account!
               </span>
               <Link
-                to={"/login"}
+                to={"/signin"}
                 className={"cursor-pointer font-bold text-sm"}
                 variant="link"
               >
-                Login
+                Signin
               </Link>
             </CardAction>
           </CardFooter>

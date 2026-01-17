@@ -6,14 +6,17 @@ import Cart from './components/Cart'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import { Toaster } from './components/ui/sonner'
+import LoadingPage from './components/LoadingPage'
 
 function App() {
+  const isLoading = true
+    if (isLoading) return <LoadingPage text="Authenticating" />;
   return (
     <>
     <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/signin' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/cart' element={<Cart />} />
       </Routes>

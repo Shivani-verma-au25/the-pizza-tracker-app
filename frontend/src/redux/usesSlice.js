@@ -4,14 +4,12 @@ const initialState = {
         userData : null,
         userLoading : false,
         isAuthenticated : false,
+        isLoading : false
     }
 
 const usersSlice = createSlice({
     name : 'auth',
-    initialState : {
-        userData : null,
-        userLoading : false,
-    },
+    initialState,
 
     reducers:{
         setusersLoading : (state ,action) =>{
@@ -22,7 +20,7 @@ const usersSlice = createSlice({
             state.userData = action?.payload;
             state.isAuthenticated = true;
         },
-        logOut : (state ,action) =>{
+        logOut : (state ) =>{
             state.userData = null,
             state.isAuthenticated = false
         }

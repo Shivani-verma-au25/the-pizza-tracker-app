@@ -1,11 +1,14 @@
+import LoadingPage from "@/components/LoadingPage";
 import PizzaCategory from "@/components/PizzaCategory";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { useSelector } from "react-redux";
 
 function Home() {
-  const {usersData} = useSelector(state => state.auth)
-  console.log(usersData, "home");
+  const {isAuthenticated ,userLoading} = useSelector(state => state.auth)
+  console.log(isAuthenticated);
+  
+  // console.log(usersData, "home");
   
   return (
     <div className="max-w-7xl h-screen mx-auto ">

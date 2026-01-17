@@ -79,6 +79,7 @@ function Login() {
                     id="password"
                     type="password"
                     name="password"
+                    placeholder='********'
                     onChange={onchangeHandler}
                     value={formData.password}
                     required
@@ -96,7 +97,7 @@ function Login() {
                       </samp>
                     </span>
                   ) : (
-                    "Login"
+                    "Signin"
                   )}
                 </Button>
                 <CardAction
