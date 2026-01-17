@@ -1,8 +1,12 @@
 import PizzaCategory from "@/components/PizzaCategory";
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Home() {
+  const {usersData} = useSelector(state => state.auth)
+  console.log(usersData, "home");
+  
   return (
     <div className="max-w-7xl h-screen mx-auto ">
       <section className="bg-gray-50 h-full flex items-center justify-center">
