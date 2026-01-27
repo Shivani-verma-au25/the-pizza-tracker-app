@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 
 function App() {
   const {userLoading} = useSelector(state => state?.auth)
-    if (userLoading) return <LoadingPage text="Authenticating" />;
+    // if (userLoading) return <LoadingPage text="Authenticating" />;
   return (
     <>
     <Navbar />

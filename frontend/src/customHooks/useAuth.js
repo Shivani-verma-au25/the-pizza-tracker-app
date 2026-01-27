@@ -41,10 +41,8 @@ const useAuth = () => {
         
     } catch (error) {
       console.error(
-        "Error while signup:",
-        error.response?.data || error.message
-      );
-      toast.error(error.response?.data || error.message)
+        "Error while signup:",error?.response?.data?.message );
+      toast.error(error?.response?.data?.message )
     }finally{
       disptach(setusersLoading(false))
     }

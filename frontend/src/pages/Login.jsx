@@ -86,7 +86,7 @@ function Login() {
                   />
                 </div>
               </div>
-              <CardFooter className="flex-col gap-2">
+              <CardFooter className="flex-col gap-2 py-5 px-0">
                 <Button type="submit" className="w-full cursor-pointer">
                   {loading ? (
                     <span className="flex justify-center items-center gap-2 ">

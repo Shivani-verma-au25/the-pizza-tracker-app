@@ -24,6 +24,7 @@ function Signup() {
     username: "",
     email: "",
     password: "",
+    role: 'user'
   });
 
   // handleOnchange
@@ -45,6 +46,7 @@ function Signup() {
     } 
   };
 
+console.log(formData,'signin');
 
 
   return (
@@ -101,11 +103,52 @@ function Signup() {
                     value={formData.password}
                   />
                 </div>
+                <div className="grid gap-2 py-2 px-2 ">
+                  <Label>Select Role</Label>
+                  <div className="flex gap-4">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        id="user"
+                        name="role"
+                        value="user"
+                        checked={formData.role === "user"}
+                        onChange={onchangeHandler}
+                        className="w-4 h-4 cursor-pointer"
+                      />
+                      <Label htmlFor="user" className="cursor-pointer mb-0">User</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        id="admin"
+                        name="role"
+                        value="admin"
+                        checked={formData.role === "admin"}
+                        onChange={onchangeHandler}
+                        className="w-4 h-4 cursor-pointer"
+                      />
+                      <Label htmlFor="admin" className="cursor-pointer mb-0">Admin</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        id="delivery"
+                        name="role"
+                        value="delivery"
+                        checked={formData.role === "delivery"}
+                        onChange={onchangeHandler}
+                        className="w-4 h-4 cursor-pointer"
+                      />
+                      <Label htmlFor="delivery" className="cursor-pointer mb-0">Delivery</Label>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <CardFooter className="flex-col gap-2">
+              <CardFooter className="flex-col gap-2 px-1">
             <Button
               type="submit"
-              className="w-full cursor-pointer"
+              className="w-full cursor-pointer pt-5 py-5"
               
             >
               {loading ? (
