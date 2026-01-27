@@ -7,10 +7,11 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import { Toaster } from './components/ui/sonner'
 import LoadingPage from './components/LoadingPage'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const isLoading = true
-    if (isLoading) return <LoadingPage text="Authenticating" />;
+  const {userLoading} = useSelector(state => state?.auth)
+    if (userLoading) return <LoadingPage text="Authenticating" />;
   return (
     <>
     <Navbar />
