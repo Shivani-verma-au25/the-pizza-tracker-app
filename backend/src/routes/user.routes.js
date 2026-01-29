@@ -2,6 +2,7 @@ import {Router} from 'express';
 import { getCurrentUser, signinUser, signOutUser, signupUser } from '../controllers/user.controller.js';
 import { isVarifyUser } from '../middlewares/auth.middleware.js';
 import { SignInRateLimiter } from '../middlewares/rateLimit.middleware.js';
+import { isAdmin } from '../middlewares/isAdmin.js';
 
 const router = Router();
 
@@ -10,6 +11,6 @@ router.route('/signin').post(SignInRateLimiter ,signinUser);
 router.route('/signout').post(signOutUser);
 
 // protected routes
-router.route('/get-current-user').get(isVarifyUser , getCurrentUser)
+router.route('/get-current-user').get(isVarifyUser ,isAdmin, getCurrentUser)
 
 export default router;  
