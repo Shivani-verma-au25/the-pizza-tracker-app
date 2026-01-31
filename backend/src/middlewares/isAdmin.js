@@ -1,7 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const isAdmin = asyncHandler( async (req ,res,next) =>{
-    console.log(req.body);
     
     if (req.user?.role !== 'admin') {
         return res.status(403).json({
