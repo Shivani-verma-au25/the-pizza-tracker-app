@@ -73,3 +73,40 @@ export const getAllPizzas = asyncHandler( async (req ,res) =>{
     })
 })
 
+
+// update pizza 
+export const updatePizza = asyncHandler( async (req ,res) => {
+    const {pizzaName , image ,category ,prices , description} = req.body;
+    const {pizzaId} =  req.params;
+    console.log(pizzaId);
+
+    // find and update pizza
+    const pizza = await Pizza.findByIdAndUpdate(
+        pizzaId,
+        {
+            pizzaName,
+            category,
+            prices,
+            description,
+            image
+        },
+        {new : true}
+    )
+    
+    // check pizza is update or not 
+    const updatedPizza = await Pizza.findById(pizza._id);
+    if(!updatePizza){
+        return res.status(400).json({
+            success : false,
+            message : "Pizza is not updated yet! Try again"
+        })
+    }
+
+    return res.status(201).json({
+        success : true ,
+        message : "Pizza has updated Now!",
+        updatedPizza
+    })
+
+})
+
