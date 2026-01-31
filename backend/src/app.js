@@ -21,9 +21,9 @@ app.use(cookieParser())
 
 // routes imports
 import userRouter from './routes/user.routes.js'
-import adminRouter from './routes/admin.routes.js'
+import pizzaRouter from './routes/pizza.routes.js'
 app.use('/api/v1/users',userRouter)
-app.use('/api/v1/admin', adminRouter)
+app.use('/api/v1/pizza', pizzaRouter)
 
 export {app};
 

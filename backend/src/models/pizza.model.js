@@ -9,7 +9,7 @@ const pizzaSchema = new Schema({
 
   image: {
     type: String, // Cloudinary URL
-    required: true
+    // required: true
   },
 
   description: {
