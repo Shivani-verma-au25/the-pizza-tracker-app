@@ -1,6 +1,8 @@
 import { Pizza } from "../models/pizza.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
+// add pizza controller
+
 export const addPizza = asyncHandler(async (req , res) =>{
     const {pizzaName,image,description,prices,category} =  req.body;
     // validate fields/
@@ -46,3 +48,21 @@ export const addPizza = asyncHandler(async (req , res) =>{
     }) 
     
 })
+
+// get all pizza
+export const getAllPizzas = asyncHandler( async (req ,res) =>{
+    const allPizzza = await Pizza.find();
+    if (!allPizzza) {
+        return res.status(400).json({
+            success :false,
+            message : "There is no Pizza !"
+        })
+    }
+
+    return res.status(200).json({
+        success :true,
+        message : "All pizza's",
+        allPizzza
+    })
+})
+
