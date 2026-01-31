@@ -13,6 +13,13 @@ export const addPizza = asyncHandler(async (req , res) =>{
         })
     }
 
+    if(!prices?.regular || !prices?.medium || !prices?.large){
+        return res.status(301).json({
+            success : false,
+            message : "Prices and Size should not be empty."
+        })
+    }
+
     const existingPizza = await Pizza.findOne({pizzaName : pizzaName})
     if (existingPizza) {
         return res.status(300).json({
