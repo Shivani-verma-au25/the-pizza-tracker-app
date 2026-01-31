@@ -110,3 +110,31 @@ export const updatePizza = asyncHandler( async (req ,res) => {
 
 })
 
+// delet pizza controller
+export const deletePizaa = asyncHandler( async (req, res) =>{
+    const {id} = req.params;
+    if (!id) {
+        return res.status(303).json({
+            success : false,
+            message : "ID should be avalible"
+        })
+    }
+
+    const deletedPizza = await Pizza.findByIdAndDelete(
+        id,
+        {new : true}
+    )
+    if (!deletedPizza) {
+        return res.status(400).json({
+            success : false,
+            message : "Pizza not found!"
+        })
+    }
+
+    return res.status(200).json({
+        success :true,
+        message : `Pizza has deleted.`,
+        
+    })
+})
+
