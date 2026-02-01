@@ -22,8 +22,11 @@ app.use(cookieParser())
 // routes imports
 import userRouter from './routes/user.routes.js'
 import pizzaRouter from './routes/pizza.routes.js'
+import userOrderRouter from './routes/userOrder.routes.js'
+
 app.use('/api/v1/users',userRouter)
 app.use('/api/v1/pizza', pizzaRouter)
+app.use('/api/v1/order', userOrderRouter)
 
 export {app};
 
