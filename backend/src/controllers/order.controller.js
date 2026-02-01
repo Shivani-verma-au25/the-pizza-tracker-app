@@ -78,7 +78,7 @@ export const userOrder = asyncHandler( async (req ,res) =>{
 
 // get all order by user
 
-export const getAllOrders = asyncHandler( async ( req ,res) =>{
+export const getMyAllOrders = asyncHandler( async ( req ,res) =>{
     // find user
     const user = await User.findById(req.user._id).select('-password');
     if (!user) {
