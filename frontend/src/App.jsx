@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
@@ -13,9 +13,12 @@ import UserProfile from './components/UserProfile'
 import UserOrder from './components/UserOrder'
 import AdminDashboard from './components/AdminDashboard'
 import AdminAllORders from './components/AdminAllORders'
+import useGetCurrentUser from './customHooks/useGetCurrentUser'
 
 function App() {
+  useGetCurrentUser()
   const {isAuthenticated ,userData} = useSelector(state => state.auth)
+ 
 
   // socket connection
   //  useEffect(()=>{
