@@ -1,4 +1,5 @@
 import LoadingPage from "@/components/LoadingPage";
+import OrderTrackingPage from "@/components/OrderTrackingPage";
 import PizzaCategory from "@/components/PizzaCategory";
 import { Button } from "@/components/ui/button";
 import React from "react";
@@ -33,6 +34,9 @@ function Home() {
       </section>
       {/* categoy section */}
       <PizzaCategory/>
+
+      {/* status */}
+      {/* <OrderTrackingPage /> */}
     </div>
   );
 }
