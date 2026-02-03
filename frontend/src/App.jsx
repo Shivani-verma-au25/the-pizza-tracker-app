@@ -11,9 +11,11 @@ import { useSelector } from 'react-redux'
 import { socket } from './utils/socket'
 import UserProfile from './components/UserProfile'
 import UserOrder from './components/UserOrder'
+import AdminDashboard from './components/AdminDashboard'
+import AdminAllORders from './components/AdminAllORders'
 
 function App() {
-  const {isAuthenticated} = useSelector(state => state.auth)
+  const {isAuthenticated ,userData} = useSelector(state => state.auth)
 
   // socket connection
   //  useEffect(()=>{
@@ -44,9 +46,14 @@ function App() {
         <Route path='/signin' element={ <Login /> }/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/cart' element={ <Cart />} />
-        
+
+        {/* user routes */}
         <Route path='/user-profile' element={!isAuthenticated ? <Navigate to={'/signin'} /> : <UserProfile /> } />
         <Route path='/my-orders' element={! isAuthenticated ? <Navigate to={'/signin'}/> :   <UserOrder /> } />
+
+        {/* admin routes */}
+        <Route path='/dashboard' element={!isAuthenticated && userData?.role !== 'admin' ? <Navigate to={'/signin'}/> : <AdminDashboard/> } />
+        <Route path='/all-orders' element={!isAuthenticated && userData?.role !== 'admin' ? <Navigate to={'/signin'}/> : <AdminAllORders/> } />
 
         <Route path="*" element={<div>Page not found</div>} />
       </Routes>

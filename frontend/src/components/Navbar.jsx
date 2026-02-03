@@ -16,6 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 function Navbar() {
   const naviagte = useNavigate();
   const { isAuthenticated, userData } = useSelector((state) => state.auth);
+
   console.log(isAuthenticated, userData?.role);
   const { userLogout } = useAuth();
 
@@ -37,7 +38,7 @@ function Navbar() {
               <PopoverTrigger render={<Button variant="outline" />}>
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={userData?.role === 'user' ? "https://github.com/shadcn.png" : 'https://github.com/evilrabbit.png'}
                     alt=""
                     className="grayscale cursor-pointer"
                   />
@@ -47,10 +48,10 @@ function Navbar() {
               <PopoverContent>
                 <PopoverHeader>
                   <PopoverTitle className="text-md font-semibold py-2">
-                    <Link  to={'/user-profile'}>Profile</Link>
+                    <Link  to={userData?.role === 'user' ? '/user-profile' : '/dashboard'}>{userData?.role === 'user'? 'Profile' : 'Dashbord'}</Link>
                   <PopoverTitle className="text-md font-semibold py-2">
                   </PopoverTitle >
-                    <Link  to={'/my-orders'}>My Orders</Link>
+                    <Link  to={userData?.role ==='user' ? '/my-orders' : '/all-orders'}>{userData?.role === 'user' ? 'My Orders' : "All Orders"}</Link>
                   </PopoverTitle>
                     <Button onClick={() => userLogout()} variant={''} className="text-md font-semibold cursor-pointer" >Sign out</Button>
                 </PopoverHeader>
