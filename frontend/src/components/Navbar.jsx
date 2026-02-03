@@ -16,6 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 function Navbar() {
   const naviagte = useNavigate();
   const { isAuthenticated, userData } = useSelector((state) => state.auth);
+  const {cart} = useSelector(state => state.cart)
 
   console.log(isAuthenticated, userData?.role);
   const { userLogout } = useAuth();
@@ -69,7 +70,7 @@ function Navbar() {
           to={"/cart"}
           className="flex justify-center items-center gap-2 bg-yellow-400 px-3 py-1 rounded-md cursor-pointer hover:scale-105 transition-all duration-200 ease-in"
         >
-          <span>0</span>
+          <span>{cart.length>0 ? cart.length : 0}</span>
           <FaCartPlus className="" />
         </Link>
       </div>

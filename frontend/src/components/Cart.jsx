@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import CartItems from "./CartItems";
+import { useSelector } from "react-redux";
+import useAuth from "@/customHooks/useAuth";
 
 function Cart() {
-  const cartItems = [1,2,3];
-  const loggedInUser = false;
-  return (
-    <div className="bg-gray-50 py-10 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        {!cartItems.length === 0 ? (
-          <div className="w-full h-screen flex justify-center items-center flex-col  ">
+  const {isAuthenticated} =  useSelector(state => state.auth)
+  const {cart} = useSelector(state => state.cart);
+  console.log(cart);
+
+  if (cart.length === 0) return <div className="w-full h-screen flex justify-center items-center flex-col  ">
             <h1 className="text-4xl py-3 font-semibold">
               Your Cart is Empty Now!
             </h1>
@@ -31,7 +31,10 @@ function Cart() {
               </Button>
             </Link>
           </div>
-        ) : (
+  
+  return (
+    <div className="bg-gray-50 py-10 min-h-screen">
+      <div className="max-w-7xl mx-auto">
           <div className="w-3xl mx-auto flex justify-center items-start flex-col gap-3">
             <div className="flex justify-center items-center gap-2 mt-10">
               <span>
@@ -40,10 +43,9 @@ function Cart() {
               <span className="font-semibold text-2xl">Order Summary</span>
             </div>
             {/* cart items */}
-
             {
-                cartItems.map((item,ind) => (
-                    <CartItems/>
+                cart.map((item,ind) => (
+                    <CartItems key={ind} item={item} />
                 ))
             }
 
@@ -66,10 +68,9 @@ function Cart() {
                 ></Textarea>
               </form>
               {/* </div> */}
-              <Button className={"cursor-pointer"}>{loggedInUser ? 'Order Now' : "Login To continue"}</Button>
+              <Button className={"cursor-pointer"}>{isAuthenticated ? 'Order Now' : "Login To continue"}</Button>
             </div>
           </div>
-        )}
       </div>
     </div>
   );
