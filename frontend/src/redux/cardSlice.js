@@ -12,6 +12,8 @@ const cartSlice = createSlice({
 
   reducers: {
     addToCart:(state, action) => {
+      console.log(action.payload);
+      
       const newItem = action.payload;
       console.log("new ", newItem);
 
@@ -48,39 +50,40 @@ const cartSlice = createSlice({
       state.totalPrice -= cartItem.price * cartItem.quantity;
 
       state.cart = state.cart.filter(
-        (item) => item.pizzaId === pizzaId && item.size === size,
+        (item) => !(item.pizzaId === pizzaId && item.size === size)
       );
+      
     },
 
     increseQuantity: (state, action) => {
       const { pizzaId, size } = action.payload;
-      const item = state.items.find(
+      const cart = state.cart.find(
         (item) => item.pizzaId === pizzaId && item.size === size,
       );
 
-      if (!item) return;
+      if (!cart) return;
 
-      item.quantity += 1;
+      cart.quantity += 1;
       state.totalQuantity += 1;
-      state.totalPrice += item.price;
+      state.totalPrice += cart.price;
     },
 
 
     decreaseQty :(state, action)=> {
       const { pizzaId, size } = action.payload;
 
-      const item = state.cart.find(
+      const cart = state.cart.find(
         item => item.pizzaId === pizzaId && item.size === size
       );
 
-      if (!item) return;
+      if (!cart) return;
 
-      item.quantity -= 1;
+      cart.quantity -= 1;
       state.totalQuantity -= 1;
-      state.totalPrice -= item.price;
+      state.totalPrice -= cart.price;
 
-      if (item.quantity === 0) {
-        state.cart = state.items.filter(
+      if (cart.quantity === 0) {
+        state.cart = state.cart.filter(
           i => !(i.pizzaId === pizzaId && i.size === size)
         );
       }

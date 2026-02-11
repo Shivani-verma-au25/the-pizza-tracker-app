@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import LoadingPage from "@/components/LoadingPage";
 import OrderTrackingPage from "@/components/OrderTrackingPage";
 import PizzaCategory from "@/components/PizzaCategory";
@@ -37,6 +38,8 @@ function Home() {
 
       {/* status */}
       {/* <OrderTrackingPage /> */}
+      {/* footer */}
+      <Footer/>
     </div>
   );
 }

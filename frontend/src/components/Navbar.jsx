@@ -22,7 +22,7 @@ function Navbar() {
   const { userLogout } = useAuth();
 
   return (
-    <nav className="max-w-7xl bg-slate-500-100 mx-auto flex justify-between items-center p-3 shadow-xs">
+    <nav className="max-w-7xl bg-slate-500-100 mx-auto flex justify-between items-center p-3 shadow-xl fixed top-0 left-0 right-0 z-50 bg-white rounded-xs">
       <div
         onClick={() => naviagte("/")}
         className=" flex justify-center items-end gap-3 cursor-pointer "

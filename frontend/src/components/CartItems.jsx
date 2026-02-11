@@ -1,26 +1,63 @@
 import React from "react";
+import { Button } from "./ui/button";
+import { useDispatch } from "react-redux";
+import { decreaseQty, increseQuantity } from "@/redux/cardSlice";
 
-function CartItems({item}) {
-  console.log(item);
-  
+function CartItems({ item }) {
+  const dispatch = useDispatch();
+
   return (
-    <div className="w-full flex  justify-between items-center border-t border-b">
-      {/* image */}
-      <div className="flex justify-center items-center gap-2">
-        <div className="bg-white w-32 h-32 p-1 overflow-hidden rounded-md border m-2 shadow-2xl">
+    <div className="w-full flex justify-between items-center py-4 px-3 border-b">
+      
+      {/* LEFT SIDE */}
+      <div className="flex items-center gap-4">
+        
+        {/* Image */}
+        <div className="w-20 h-20 bg-white p-1 rounded-xl border shadow-sm overflow-hidden">
           <img
-            className="w-full h-full object-cover p-2 rounded-full hover:scale-105 transition-all duration-150 ease"
+            className="w-full h-full object-cover rounded-lg hover:scale-105 transition duration-200"
             src={item.image}
-            alt=""
+            alt={item.name}
           />
         </div>
-        <div className="flex flex-col justify-center items-start p-2 ">
-          <p className="font-semibold text-lg">{item.name}</p>
-          <p className="font-medium text-sm text-gray-400">{item.size}</p>
-          <p className="font-medium text-sm text-gray-400">{item.quantity} Pcs </p>
+
+        {/* Info */}
+        <div className="flex flex-col">
+          <p className="font-semibold text-base">{item.name}</p>
+          <p className="text-sm text-gray-500">Size: {item.size}</p>
+          <p className="text-sm text-gray-500">{item.quantity} pcs</p>
         </div>
       </div>
-      <span>₨.{item.price}</span>
+
+      {/* CENTER → Quantity */}
+      <div className="flex items-center gap-3 border rounded-lg px-3 py-1">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            dispatch(decreaseQty({ pizzaId: item.pizzaId, size: item.size }))
+          }
+        >
+          −
+        </Button>
+
+        <span className="font-medium w-5 text-center">{item.quantity}</span>
+
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            dispatch(increseQuantity({ pizzaId: item.pizzaId, size: item.size }))
+          }
+        >
+          +
+        </Button>
+      </div>
+
+      {/* RIGHT SIDE → Price */}
+      <p className="font-semibold text-lg min-w-[70px] text-right">
+        ₹ {item.price * item.quantity}
+      </p>
     </div>
   );
 }

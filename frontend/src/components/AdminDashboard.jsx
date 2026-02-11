@@ -2,15 +2,31 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const AdminDashboard = () => {
-  return (
-    <div>
-      <h2>Admin Dashboard</h2>
+     const pizzas = [
+    { id: 1, name: "Margherita" },
+    { id: 2, name: "Farmhouse" },
+  ];
 
-      <ul>
-        <li><Link to="/admin/pizzas">Manage Pizzas</Link></li>
-        <li><Link to="/admin/orders">View Orders</Link></li>
-      </ul>
+  return (
+    <div className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+
+      <Button className="mb-4">+ Add New Pizza</Button>
+
+      <div className="space-y-3">
+        {pizzas.map((p) => (
+          <div key={p.id} className="flex justify-between border p-4 rounded-xl">
+            <span>{p.name}</span>
+
+            <div className="flex gap-2">
+              <Button variant="outline">Edit</Button>
+              <Button variant="destructive">Delete</Button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
+
   )
 }
 

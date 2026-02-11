@@ -5,15 +5,19 @@ import { Link } from "react-router-dom";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import CartItems from "./CartItems";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "@/customHooks/useAuth";
+import { decreaseQty, increseQuantity } from "@/redux/cardSlice";
 
 function Cart() {
   const {isAuthenticated} =  useSelector(state => state.auth)
-  const {cart} = useSelector(state => state.cart);
+  const {cart,totalPrice,totalQuantity} = useSelector(state => state.cart);
+  const disptach = useDispatch();
   console.log(cart);
 
-  if (cart.length === 0) return <div className="w-full h-screen flex justify-center items-center flex-col  ">
+
+  // const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  if (cart?.length === 0) return <div className="w-full h-screen flex justify-center items-center flex-col  ">
             <h1 className="text-4xl py-3 font-semibold">
               Your Cart is Empty Now!
             </h1>
@@ -33,14 +37,14 @@ function Cart() {
           </div>
   
   return (
-    <div className="bg-gray-50 py-10 min-h-screen">
+    <div className="bg-gray-50 py-10 mt-20 min-h-screen">
       <div className="max-w-7xl mx-auto">
           <div className="w-3xl mx-auto flex justify-center items-start flex-col gap-3">
             <div className="flex justify-center items-center gap-2 mt-10">
               <span>
                 <ShoppingBasket />
               </span>
-              <span className="font-semibold text-2xl">Order Summary</span>
+              <span className="font-semibold text-2xl">Your Cart</span>
             </div>
             {/* cart items */}
             {
@@ -51,7 +55,7 @@ function Cart() {
 
             {/* total amount */}
             <div className="w-full flex justify-end gap-5 flex-col">
-              <h2 className="text-end">Total Amount: ₨.300</h2>
+              <h2 className="text-end">Total Amount: ₨.{totalPrice}</h2>
               {/* <div className=''> */}
               <form
                 action=""
