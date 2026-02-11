@@ -2,6 +2,33 @@ import mongoose,{Schema} from 'mongoose'
 import bcrypt from 'bcryptjs'   
 import jwt from 'jsonwebtoken'  
 
+
+const cartShema = new Schema({
+    pizzaid :{
+        type : String,
+        required : true
+    },
+    name:{
+        type:String
+    },
+    size:{
+        type : String,
+        required : true 
+    },
+    price:{
+        type : Number,  
+        required : true
+    },
+    quantity:{
+        type : Number,
+        required : true
+    },
+    image:{
+        type : String,
+        required : true
+    }
+})
+
 const userSchema = new Schema({
     username :{
         type : String,
@@ -23,7 +50,8 @@ const userSchema = new Schema({
         type:String,
         enum:['user','admin','Delivery'],
         default:'user',
-    }
+    },
+    cart:[cartShema]
 },{timestamps:true})
 
 // mongoose middleware to hash password before saving it to databse
