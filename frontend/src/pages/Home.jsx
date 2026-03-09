@@ -11,6 +11,9 @@ function Home() {
   console.log(isAuthenticated);
   
   // console.log(usersData, "home");
+  if (userLoading) {
+    return <LoadingPage />
+  }
   
   return (
     <div className="max-w-7xl h-screen mx-auto ">

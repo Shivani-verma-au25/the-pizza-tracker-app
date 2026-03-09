@@ -109,6 +109,20 @@ export const signinUser = asyncHandler( async (req, res) =>{
     // generate token
     const rToken = await existUser.generateAccessToken();
 
+    // guest user cart handling
+    // if(guestCart && guestCart.length > 0){
+    //     const existingCart = guestCart.forEach((item) => {
+    //         item.pizzaid.toString() === guestCart.pizzaid && item.size === guestCart.size;
+    //     });
+    //     if(existingCart){   
+    //         existingCart.quantity += guestCart.quantity;
+    //     }else{
+    //         user.cart.push(guestCart);
+    //     }
+    // }
+
+    await user.save();  
+
     // options
     const options = {
         httpOnly:true,
@@ -124,7 +138,8 @@ export const signinUser = asyncHandler( async (req, res) =>{
     .json({
         success:true,
         message:`Welcome back ${user.username} !`,
-        user
+        user,
+        // cart:user.cart
     })
 })
 

@@ -6,6 +6,7 @@ const initialState = saveCardToLocalStorage ? JSON.parse(saveCardToLocalStorage)
   cart: [],
   totalQuantity: 0,
   totalPrice: 0,
+  cardLoading : false,
 };
 
 
@@ -17,6 +18,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart:(state, action) => {
       console.log(action.payload);
+
       
       const newItem = action.payload;
       console.log("new ", newItem);

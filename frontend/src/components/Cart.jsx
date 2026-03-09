@@ -1,7 +1,7 @@
 import { ShoppingBasket, ShoppingCartIcon } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import CartItems from "./CartItems";
@@ -10,10 +10,17 @@ import useAuth from "@/customHooks/useAuth";
 import { decreaseQty, increseQuantity } from "@/redux/cardSlice";
 
 function Cart() {
-  const {isAuthenticated} =  useSelector(state => state.auth)
+  const {isAuthenticated,userLoading} =  useSelector(state => state.auth)
   const {cart,totalPrice,totalQuantity} = useSelector(state => state.cart);
   const disptach = useDispatch();
+  const navigate = useNavigate();
   console.log(cart);
+
+  if(userLoading) {
+    return <div className="w-full h-screen flex justify-center items-center">
+      <ShoppingBasket size={50} className="animate-spin text-amber-600" />
+    </div>
+  }
 
 
   // const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -57,7 +64,7 @@ function Cart() {
             <div className="w-full flex justify-end gap-5 flex-col">
               <h2 className="text-end">Total Amount: ₨.{totalPrice}</h2>
               {/* <div className=''> */}
-              <form
+              {/* <form
                 action=""
                 className="flex justify-center items-end flex-col"
               >
@@ -70,9 +77,11 @@ function Cart() {
                   className=" mt-3 rounded-md  border-gray-300 focus:border-gray-500 focus:ring-gray-500 resize-none"
                   placeholder="Address..."
                 ></Textarea>
-              </form>
+              </form> */}
               {/* </div> */}
-              <Button className={"cursor-pointer"}>{isAuthenticated ? 'Order Now' : "Login To continue"}</Button>
+              <Button 
+              onClick ={() => navigate('/check-out')}
+               className={"cursor-pointer"}>{isAuthenticated ? 'Order Checkout' : "Login To continue"}</Button>
             </div>
           </div>
       </div>

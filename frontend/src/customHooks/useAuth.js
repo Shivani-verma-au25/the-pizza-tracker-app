@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const useAuth = () => {
+  // for guest user cart
+  const guestCart = JSON.parse(localStorage.getItem("cart")) || [];
     // user signup 
     const navigate = useNavigate()
     const disptach = useDispatch()
@@ -33,9 +35,13 @@ const useAuth = () => {
   const userLogin = async(userData) =>{
     disptach(setusersLoading(true))
     try {
-        const res = await baseUrl.post('v1/users/signin',userData);
+        const res = await baseUrl.post('v1/users/signin',userData ,guestCart);
         toast.success(res?.data?.message)
         disptach(setUsersData(res?.data?.user))
+
+        // 🔥 USE HERE (after login success)
+        localStorage.removeItem("cart");     // clear guest cart
+        disptach(setCart(data.cart));        // store merged DB cart in Redux
         navigate('/')
         // store data in redux
         

@@ -11,13 +11,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Loader2, Pizza } from "lucide-react";
 import useAuth from "@/customHooks/useAuth";
 
 function Login() {
   const [loading, setLoading] = useState(false);
   const { userLogin } = useAuth();
+  const navgate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -36,6 +37,7 @@ function Login() {
     try {
       // calling custom hook
       userLogin(formData);
+      navgate('/')
     } catch (error) {
       console.log("Error while calling api", error);
     } finally {

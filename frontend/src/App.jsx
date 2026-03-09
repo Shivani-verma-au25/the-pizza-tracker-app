@@ -14,6 +14,7 @@ import UserOrder from './components/UserOrder'
 import AdminDashboard from './components/AdminDashboard'
 import AdminAllORders from './components/AdminAllORders'
 import useGetCurrentUser from './customHooks/useGetCurrentUser'
+import CheckoutPage from './components/CheckoutPage'
 
 function App() {
   useGetCurrentUser()
@@ -53,10 +54,13 @@ function App() {
         {/* user routes */}
         <Route path='/user-profile' element={!isAuthenticated ? <Navigate to={'/signin'} /> : <UserProfile /> } />
         <Route path='/my-orders' element={! isAuthenticated ? <Navigate to={'/signin'}/> :   <UserOrder /> } />
+        <Route path='/check-out' element={! isAuthenticated ? <Navigate to={'/check-out'}/> :   <CheckoutPage /> } />
+
 
         {/* admin routes */}
         <Route path='/dashboard' element={!isAuthenticated && userData?.role !== 'admin' ? <Navigate to={'/signin'}/> : <AdminDashboard/> } />
         <Route path='/all-orders' element={!isAuthenticated && userData?.role !== 'admin' ? <Navigate to={'/signin'}/> : <AdminAllORders/> } />
+
 
         <Route path="*" element={<div>Page not found</div>} />
       </Routes>

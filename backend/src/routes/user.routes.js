@@ -7,7 +7,7 @@ import { isAdmin } from '../middlewares/isAdmin.js';
 const router = Router();
 
 router.route('/signup').post(signupUser);
-router.route('/signin').post(SignInRateLimiter ,signinUser);
+router.route('/signin').post(SignInRateLimiter ,signinUser );
 router.route('/signout').post(signOutUser);
 
 // protected routes
