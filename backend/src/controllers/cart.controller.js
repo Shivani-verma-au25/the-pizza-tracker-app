@@ -3,11 +3,27 @@ import {  asyncHandler } from "../utils/asyncHandler.js";
 
 
 //  get cart items of the user
-export const getCart = asyncHandler(async ( req , res) =>{
-    const user = await User.findById(req?.user._id);  // find user by id from the request object
-    if(!user) return res.status(404).json({message:"User not found"});
-    res.status(200).json({cart : user?.cart || []}) // return the cart of the user or an empty array if the cart is not found
-})
+export const getCart = asyncHandler(async (req, res) => {
+  const user = await User.findById(req?.user._id);
+
+  if (!user) return res.status(404).json({ message: "User not found" });
+
+  const cart = user.cart || [];
+
+  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const totalAmount = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,0);
+
+  res.status(200).json({
+    success: true,
+    message: "Cart retrieved successfully",
+    cart,
+    totalQuantity,
+    totalAmount
+  });
+});
+
 
 // add to cart 
 export const addToCart = asyncHandler(async ( req,res)=>{
@@ -21,7 +37,7 @@ export const addToCart = asyncHandler(async ( req,res)=>{
 
     // find if the product already exists in the cart with the same size
     const existingCartItem = user.cart.find((item) =>(
-        item.pizzaid === pizzaid && item.size === size
+        item.pizzaid.toString() === pizzaid && item.size === size
     )) 
     // if the product already exists in the cart, update the quantity  
     if(existingCartItem){
@@ -32,10 +48,16 @@ export const addToCart = asyncHandler(async ( req,res)=>{
     }
     // save user in database
     await user.save();
+
+    const totalQuantity = user.cart.reduce((acc, item) => acc + item.quantity, 0);
+    const totalAmount = user.cart.reduce((acc, item) => acc + item.price * item.quantity,0);
+    
     return res.status(201).json({
         success : true,
         message : "Product addded to the cart successfully.",
-        cart : user.cart
+        cart : user.cart,
+        totalQuantity,
+        totalAmount
     })
 
 })
@@ -121,3 +143,15 @@ export const clearCart = asyncHandler ( async ( req, res) =>{
         cart : user.cart
     }) 
 })
+
+
+// export const getCartItemsCount = asyncHandler( async ( req, res) =>{
+//     const user = await User.findById(req?.user._id);  // find user by id from the request object
+//     if(!user) return res.status(404).json({message:"User not found"});  
+//     const cartItemsCount = user.cart.reduce((total, item) => total + item.quantity, 0); // calculate the total quantity of items in the cart
+//     return res.status(200).json({
+//         success : true, 
+//         cartItemsCount
+//     })
+// })
+
